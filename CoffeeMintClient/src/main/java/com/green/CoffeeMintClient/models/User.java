@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class User {
 	
 	@Id
-	@Column(name="userid")
+	@Column(name="userID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userID;
 	private String username;
@@ -20,7 +20,7 @@ public class User {
 	private boolean enable;
 	
 	public User() {
-		super();
+		
 	}
 	
 	public User(int userID, String username, String password, boolean enable) {
@@ -54,7 +54,5 @@ public class User {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
-	
-	
 	
 }

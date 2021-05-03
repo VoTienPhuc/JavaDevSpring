@@ -8,7 +8,10 @@ public class MainController {
 
 	@GetMapping("/login")
 	public String showLoginView() {
-		
 		return "login";
+	}
+	@GetMapping("/product")
+	public String showProductView() {
+		return "product";
 	}
 }

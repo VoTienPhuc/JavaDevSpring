@@ -84,7 +84,7 @@ https://templatemo.com/tm-558-klassy-cafe
                             </li>
                             <!-- <li class=""><a rel="sponsored" href="https://templatemo.com" target="_blank">External URL</a></li> -->
                             <li class="scroll-to-section"><a href="#reservation">Contact Us</a></li>
-                            <li class="scroll-to-section"><a href="/login">Login</a></li>
+                            <li sec:authorize="isAnonymous()"class="scroll-to-section"><a href="/login">Login</a></li>
                             <li sec:authorize="isAuthenticated()"class="scroll-to-section"><a href="/logout">Logout</a></li>
                             <li sec:authorize="isAuthenticated()"class="scroll-to-section"><a href="/profile" sec:authentication="name"></a></li>
                         </ul>        

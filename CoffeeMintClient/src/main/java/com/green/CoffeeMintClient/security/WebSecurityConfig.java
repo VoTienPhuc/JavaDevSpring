@@ -13,12 +13,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import com.green.CoffeeMintClient.handler.*;	
 import com.green.CoffeeMintClient.controllers.services.UserDetailsServiceImpl;
 
 @Configuration()
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	public final String password = "$2a$10$q0auOf2geNGKW6y4zf0KmOUoLWJJ0t4MqlIp8LQ1W0j/x.5PAzruW";
+	//public final String password = "$2a$10$q0auOf2geNGKW6y4zf0KmOUoLWJJ0t4MqlIp8LQ1W0j/x.5PAzruW";
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -27,6 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
+		
 		return new UserDetailsServiceImpl();
 
 	}
@@ -63,9 +65,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 //		.anyRequest().permitAll();
-		.antMatchers("/", "/assets/**", "/css/**", "/fonts/**", "/images/**", "/js/**", "/venfor/**").permitAll()
+		.antMatchers("/","/assets/**", "/css/**", "/fonts/**", "/images/**", "/js/**", "/venfor/**").permitAll()
 		.anyRequest().authenticated()
-		.and().formLogin().permitAll();
+		.and().formLogin().loginPage("/login").permitAll()
+		.usernameParameter("username")
+		.passwordParameter("pass")
+		.loginProcessingUrl("/dologin")
+		.failureHandler(new OnAuthenticationFailureHandler())
+		.successHandler(new OnAuthenticationSuccessHandler())
+		.and().logout().permitAll()
+		.and().exceptionHandling().accessDeniedPage("/403");
 //		.and().formLogin().loginPage("/login").permitAll().and()
 //		.logout().permitAll();
 	}

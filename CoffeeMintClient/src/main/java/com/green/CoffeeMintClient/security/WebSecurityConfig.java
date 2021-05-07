@@ -7,12 +7,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
 import com.green.CoffeeMintClient.handler.*;	
 import com.green.CoffeeMintClient.controllers.services.UserDetailsServiceImpl;
 
@@ -65,9 +62,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 //		.anyRequest().permitAll();
-		.antMatchers("/","/assets/**", "/css/**", "/fonts/**", "/images/**", "/js/**", "/venfor/**").permitAll()
+		.antMatchers("/","/assets/**","/login2","/login", "/css/**", "/fonts/**", "/images/**", "/js/**", "/venfor/**").permitAll()
 		.anyRequest().authenticated()
-		.and().formLogin().loginPage("/login").permitAll()
+		.and().formLogin().loginPage("/login2").permitAll()
 		.usernameParameter("username")
 		.passwordParameter("pass")
 		.loginProcessingUrl("/dologin")
